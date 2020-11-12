@@ -1,8 +1,12 @@
 {
   'use strict';
   
+  /** 四字熟語の一文字あたりの描画サイズ */
   const CHARACTER_SIZE = 64;
 
+  /**
+   * 四字熟語を表すクラス
+   */
   FourCharacterPhrasePuzzle.FourCharacterPhrase = class {
     constructor(fcp) {
       this.text = fcp;
@@ -15,6 +19,13 @@
     }
   }
 
+  /**
+   * 四字熟語を描画
+   * @param {*} context 
+   * @param {*} fcp 
+   * @param {*} x 
+   * @param {*} y 
+   */
   FourCharacterPhrasePuzzle.draw = function(context, fcp, x, y) {
     context.font = CHARACTER_SIZE + 'px serif';
     for (let i = 0; i < fcp.length; ++i) {
@@ -22,16 +33,23 @@
     }
   };
 
+  /**
+   * 指定されたインデックス番号の四字熟語を取得
+   * @param {*} index 
+   */
   FourCharacterPhrasePuzzle.getFCP = function(index) {
     return FourCharacterPhraseTable[index].text;
   };
+
+  /**
+   * ランダムな四字熟語を取得
+   */
   FourCharacterPhrasePuzzle.getRandomFCP = function() {
     let index = Math.floor(Math.random() * Math.floor(FourCharacterPhraseTable.length));
     return FourCharacterPhrasePuzzle.getFCP(index);
   };
 
-  
-
+  /** 四字熟語テーブル */
   let FourCharacterPhraseTable = [
     { text: '一衣帯水', read:'いちいたいすい' },
     { text: '犬馬之労', read:'けんばのろう' },
