@@ -45,12 +45,12 @@
    * ランダムな四字熟語を取得
    */
   FourCharacterPhrasePuzzle.getRandomFCP = () => {
-    let index = Math.floor(Math.random() * Math.floor(FourCharacterPhraseTable.length));
+    const index = Math.floor(Math.random() * Math.floor(FourCharacterPhraseTable.length));
     return FourCharacterPhrasePuzzle.getFCP(index);
   };
 
   /** 四字熟語テーブル */
-  let FourCharacterPhraseTable = [
+  const FourCharacterPhraseTable = [
     { text: '一衣帯水', read:'いちいたいすい' },
     { text: '犬馬之労', read:'けんばのろう' },
     { text: '羊頭狗肉', read:'ようとうくにく' },
