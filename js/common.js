@@ -4,11 +4,11 @@ var FourCharacterPhrasePuzzle = {};
 
   FourCharacterPhrasePuzzle.Common = {};
 
-  FourCharacterPhrasePuzzle.Common.initialize = function() {
+  FourCharacterPhrasePuzzle.Common.initialize = () => {
 
   };
 
-  FourCharacterPhrasePuzzle.Common.run = function(drawFunc) {
+  FourCharacterPhrasePuzzle.Common.run = (drawFunc) => {
     let canvas = document.getElementById("canvas");
     let context = canvas.getContext("2d");
     drawFunc(context);

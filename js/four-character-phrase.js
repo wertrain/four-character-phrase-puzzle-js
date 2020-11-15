@@ -26,7 +26,7 @@
    * @param {*} x 
    * @param {*} y 
    */
-  FourCharacterPhrasePuzzle.draw = function(context, fcp, x, y) {
+  FourCharacterPhrasePuzzle.draw = (context, fcp, x, y) => {
     context.font = CHARACTER_SIZE + 'px serif';
     for (let i = 0; i < fcp.length; ++i) {
       context.fillText(fcp.indexOf(i), x, y + (CHARACTER_SIZE * i));
@@ -37,14 +37,14 @@
    * 指定されたインデックス番号の四字熟語を取得
    * @param {*} index 
    */
-  FourCharacterPhrasePuzzle.getFCP = function(index) {
+  FourCharacterPhrasePuzzle.getFCP = (index) => {
     return FourCharacterPhraseTable[index].text;
   };
 
   /**
    * ランダムな四字熟語を取得
    */
-  FourCharacterPhrasePuzzle.getRandomFCP = function() {
+  FourCharacterPhrasePuzzle.getRandomFCP = () => {
     let index = Math.floor(Math.random() * Math.floor(FourCharacterPhraseTable.length));
     return FourCharacterPhrasePuzzle.getFCP(index);
   };

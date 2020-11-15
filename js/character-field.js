@@ -6,7 +6,7 @@
    */
   FourCharacterPhrasePuzzle.CharacterField = class {
     constructor(fcp) {
-      this.text = fcp;
+      this.fcp = fcp;
     }
     indexOf(i) {
       return this.text[i]
