@@ -8,23 +8,24 @@
   </head>
   <body>
     <script>
+    {
+      const canvasWidth = 1280, canvasHeight = 720;
+      let characterField;
       function main(context) {
         let FCPP = FourCharacterPhrasePuzzle;
-        let field = new FCPP.CharacterField(4);
-        for (let i = 0; i < 4; ++i) {
-          let fcp = new FCPP.FourCharacterPhrase(FCPP.getRandomFCP());
-          FCPP.draw(context, fcp, i * 100, 100);
-        }
-
-        field.draw(context, 100, 100)
-
+        characterField = new FCPP.CharacterField(4, 100, 100);
+        setInterval(function() {
+          context.clearRect(0, 0, canvasWidth, canvasHeight);
+          characterField.draw(context);
+        }, 32);
       }
       function onClick(event) {
 
       }
       function onMouseMove(event) {
-
+        characterField.onMouseMove(event)
       }
+    }
     </script>
     <div class="container">
       <div class="text-center">

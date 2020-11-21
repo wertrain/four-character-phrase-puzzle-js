@@ -11,22 +11,48 @@
    * 文字表示フィールド
    */
   FourCharacterPhrasePuzzle.CharacterField = class {
-    constructor(col) {
+    constructor(col, x, y) {
       this.col = col;
+      this.offsetX = x;
+      this.offsetY = y;
+      this.mouseMove = null;
+
+      this.fcps = [];
+      for (let c = 0; c < this.col; ++c) {
+        this.fcps.push(new FourCharacterPhrasePuzzle.FourCharacterPhrase(FourCharacterPhrasePuzzle.getRandomFCP()))
+      }
     }
-    draw(context, x, y) {
+    draw(context) {
+
+      let defaultFont = context.font;
+      let defaultFillStyle = context.fillStyle;
+      let defaultStrokeStyle = context.strokeStyle ;
+
       context.font = CHARACTER_SIZE + 'px serif';
       for (let c = 0; c < this.col; ++c) {
-        let fcp = new FourCharacterPhrasePuzzle.FourCharacterPhrase(FourCharacterPhrasePuzzle.getRandomFCP());
+        let fcp = this.fcps[c];
+        let characterColors = []
         for (let i = 0; i < fcp.length; ++i) {
-          context.strokeRect(
-            x + (c * FIELD_SIZE) - FIELD_SIZE_HALF + CHARACTER_SIZE_HALF,
-            y + (FIELD_SIZE * i) - FIELD_SIZE_HALF + CHARACTER_SIZE_HALF + FIELD_SIZE_HALF / 2, FIELD_SIZE, FIELD_SIZE);
+          let x = this.offsetX + (c * FIELD_SIZE) - FIELD_SIZE_HALF + CHARACTER_SIZE_HALF;
+          let y = this.offsetY + (FIELD_SIZE * i) - FIELD_SIZE_HALF + CHARACTER_SIZE_HALF + FIELD_SIZE_HALF / 2;
+          let onMouse = this.mouseMove == null ? false :
+            (x < this.mouseMove.clientX && x + FIELD_SIZE > this.mouseMove.clientX && y < this.mouseMove.clientY && y + FIELD_SIZE > this.mouseMove.clientY);
+          context.strokeStyle = onMouse ? 'rgb(0, 0, 255)' : defaultStrokeStyle;
+          characterColors.push(context.strokeStyle);
+          context.strokeRect(x, y, FIELD_SIZE, FIELD_SIZE);
         }
         for (let i = 0; i < fcp.length; ++i) {
-          context.fillText(fcp.indexOf(i), x + c * FIELD_SIZE, y + (FIELD_SIZE * i) + FIELD_SIZE);
+          context.fillStyle = characterColors[i];
+          context.fillText(fcp.indexOf(i), this.offsetX + c * FIELD_SIZE, this.offsetY + (FIELD_SIZE * i) + FIELD_SIZE);
         }
       }
+
+      context.strokeStyle = defaultStrokeStyle;
+      context.fillStyle = defaultFillStyle;
+      context.font = defaultFont;
+    }
+    onMouseMove(event) {
+      this.mouseMove = event;
     }
     get length() {
       return this.text.length;
