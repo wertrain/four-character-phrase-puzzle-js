@@ -23,7 +23,10 @@
 
       }
       function onMouseMove(event) {
-        characterField.onMouseMove(event)
+        let rect = event.target.getBoundingClientRect()
+        let x = event.clientX - rect.left
+        let y = event.clientY - rect.top
+        characterField.onMouseMove(x, y)
       }
     }
     </script>

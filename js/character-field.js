@@ -51,8 +51,8 @@
       context.fillStyle = defaultFillStyle;
       context.font = defaultFont;
     }
-    onMouseMove(event) {
-      this.mouseMove = event;
+    onMouseMove(x, y) {
+      this.mouseMove = {clientX: x, clientY:y};
     }
     get length() {
       return this.text.length;
