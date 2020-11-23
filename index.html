@@ -13,14 +13,25 @@
       let characterField;
       function main(context) {
         let FCPP = FourCharacterPhrasePuzzle;
-        characterField = new FCPP.CharacterField(4, 100, 100);
-        setInterval(function() {
+        characterField = new FCPP.CharacterField(10, 100, 30);
+        let timer = setInterval(() => {
+          //clearInterval(timer);
+          //context.fillRect(0, 0, canvasWidth, canvasHeight);
           context.clearRect(0, 0, canvasWidth, canvasHeight);
           characterField.draw(context);
         }, 32);
       }
-      function onClick(event) {
-
+      function onMouseDown(event) {
+        let rect = event.target.getBoundingClientRect()
+        let x = event.clientX - rect.left
+        let y = event.clientY - rect.top
+        characterField.onMouseDown(x, y)
+      }
+      function onMouseUp(event) {
+        let rect = event.target.getBoundingClientRect()
+        let x = event.clientX - rect.left
+        let y = event.clientY - rect.top
+        characterField.onMouseUp(x, y)
       }
       function onMouseMove(event) {
         let rect = event.target.getBoundingClientRect()
@@ -30,20 +41,18 @@
       }
     }
     </script>
-    <div class="container">
-      <div class="text-center">
-        <canvas id="canvas" width="1280" height="720"></canvas>
-      </div>
-    </div>
+    <canvas id="canvas" width="1280" height="720"></canvas>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="./js/common.js"></script>
+    <script src="./js/util.js"></script>
     <script src="./js/four-character-phrase.js"></script>
     <script src="./js/character-field.js"></script>
     <script>
       FourCharacterPhrasePuzzle.Common.initialize();
       let canvas = FourCharacterPhrasePuzzle.Common.run(main);
-      canvas.addEventListener('click', onClick, false);
+      canvas.addEventListener('mousedown', onMouseDown, false);
+      canvas.addEventListener('mouseup', onMouseUp, false);
       canvas.addEventListener('mousemove', onMouseMove, false);
     </script>
   </body>
