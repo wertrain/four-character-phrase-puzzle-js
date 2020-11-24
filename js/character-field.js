@@ -28,8 +28,8 @@
       this.fcps = [];
       for (let c = 0; c < this.col; ++c) {
         this.fcps.push(new FourCharacterPhrasePuzzle.FourCharacterPhrase(FourCharacterPhrasePuzzle.getRandomFCP()));
-        // 一つの四字熟語につき、二つ合っている状態になるようにテーブルを作成する
-        FourCharacterPhrasePuzzle.Util.shuffleArray([true, true, false, false]).forEach(
+        // 一つの四字熟語につき、最低一つ合っている状態になるようにテーブルを作成する
+        FourCharacterPhrasePuzzle.Util.shuffleArray([true, false, false, false]).forEach(
           l => this.lockedTable.push(l)
         );
       }
