@@ -21,7 +21,8 @@
       this.offsetY = y;
       this.mouseMove = null;
       this.activeFieldIndex = -1;
-      this.lockedTable = []
+      this.lockedTable = [];
+      this.characterTable = [];
       this.characterIndices = FourCharacterPhrasePuzzle.Util.getShuffledArray(this.col * PHRASE_COUNT);
       console.log(this.characterIndices)
 
@@ -32,7 +33,11 @@
         FourCharacterPhrasePuzzle.Util.shuffleArray([true, false, false, false]).forEach(
           l => this.lockedTable.push(l)
         );
+        for (let i = 0; i < PHRASE_COUNT; ++i) {
+          this.characterTable.push(this.fcps[c].indexOf(i));
+        }
       }
+      console.log(this.characterTable);
       // テーブルの状態とロック状態を同期する
       //（true になっているものは正しいインデックスが入っているようにする）
       for (let i = 0; i < this.characterIndices.length; ++i) {
