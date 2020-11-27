@@ -28,7 +28,8 @@
   };
 
   /**
-   * 指定された長さ分の連番の数値が入ったシャッフルされた配列を取得
+   * 指定された長さ分の連番の数値が入ったシャッフルされた状態の配列を取得
+   * @param {*} length 
    */
   FourCharacterPhrasePuzzle.Util.getShuffledArray = (length) => {
     let array = FourCharacterPhrasePuzzle.Util.getArray(length);
