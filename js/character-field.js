@@ -24,7 +24,6 @@
       this.lockedTable = [];
       this.characterTable = [];
       this.characterIndices = FourCharacterPhrasePuzzle.Util.getShuffledArray(this.col * PHRASE_COUNT);
-      console.log(this.characterIndices)
 
       this.fcps = [];
       for (let c = 0; c < this.col; ++c) {
@@ -37,7 +36,6 @@
           this.characterTable.push(this.fcps[c].indexOf(i));
         }
       }
-      console.log(this.characterTable);
       // テーブルの状態とロック状態を同期する
       //（true になっているものは正しいインデックスが入っているようにする）
       for (let i = 0; i < this.characterIndices.length; ++i) {
@@ -63,7 +61,7 @@
           (x < this.mouseMove.clientX && x + FIELD_SIZE > this.mouseMove.clientX && y < this.mouseMove.clientY && y + FIELD_SIZE > this.mouseMove.clientY);
         let color = onMouse ? 'rgb(0, 0, 255)' : 'rgb(0, 0, 0)';
         color = this.activeFieldIndex == count ? 'rgb(255, 128, 0)' : color;
-        color = count == this.characterIndices[count] ? 'rgb(255, 0, 0)' : color;
+        color = this.isCorrect(count) ? 'rgb(255, 0, 0)' : color;
         context.lineWidth = this.lockedTable[count] ? 8 : 1;
         context.strokeStyle = color;
         context.strokeRect(x, y, FIELD_SIZE, FIELD_SIZE);
@@ -110,6 +108,11 @@
         let y = (this.offsetY + (FIELD_SIZE * col) - FIELD_SIZE_HALF + CHARACTER_SIZE_HALF + FIELD_SIZE_HALF / 2) + (col * PADDING_TOP);
         loopFunc(row, col, x, y, count);
       }
+    }
+    isCorrect(index) {
+      return (index == this.characterIndices[index]) || 
+      // 同じ文字でも正解と判定する
+      (this.characterTable[index] == this.characterTable[this.characterIndices[index]]);
     }
     get length() {
       return this.text.length;
