@@ -9,35 +9,26 @@
   <body>
     <script>
     {
-      const canvasWidth = 1280, canvasHeight = 720;
-      let characterField;
       function main(context) {
-        let FCPP = FourCharacterPhrasePuzzle;
-        characterField = new FCPP.CharacterField(10, 100, 30);
-        let timer = setInterval(() => {
-          //clearInterval(timer);
-          //context.fillRect(0, 0, canvasWidth, canvasHeight);
-          context.clearRect(0, 0, canvasWidth, canvasHeight);
-          characterField.draw(context);
-        }, 32);
+        FourCharacterPhrasePuzzle.Level.update(context);
       }
       function onMouseDown(event) {
         let rect = event.target.getBoundingClientRect()
         let x = event.clientX - rect.left
         let y = event.clientY - rect.top
-        characterField.onMouseDown(x, y)
+        FourCharacterPhrasePuzzle.Level.onMouseDown(x, y)
       }
       function onMouseUp(event) {
         let rect = event.target.getBoundingClientRect()
         let x = event.clientX - rect.left
         let y = event.clientY - rect.top
-        characterField.onMouseUp(x, y)
+        FourCharacterPhrasePuzzle.Level.onMouseUp(x, y)
       }
       function onMouseMove(event) {
         let rect = event.target.getBoundingClientRect()
         let x = event.clientX - rect.left
         let y = event.clientY - rect.top
-        characterField.onMouseMove(x, y)
+        FourCharacterPhrasePuzzle.Level.onMouseMove(x, y)
       }
     }
     </script>
@@ -48,6 +39,7 @@
     <script src="./js/util.js"></script>
     <script src="./js/four-character-phrase.js"></script>
     <script src="./js/character-field.js"></script>
+    <script src="./js/level.js"></script>
     <script>
       FourCharacterPhrasePuzzle.Common.initialize();
       let canvas = FourCharacterPhrasePuzzle.Common.run(main);
