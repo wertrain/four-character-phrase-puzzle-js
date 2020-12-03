@@ -114,6 +114,13 @@
       // 同じ文字でも正解と判定する
       (this.characterTable[index] == this.characterTable[this.characterIndices[index]]);
     }
+    isCorrectAll() {
+      for (let count = 0; count < this.characterIndices.length; ++count) {
+        if (!this.isCorrect(count))
+          return false
+      }
+      return true;
+    }
     get length() {
       return this.text.length;
     }

@@ -5,11 +5,14 @@
 
   FCPP.Level = {};
 
+  let level = 0;
+  let levelTable = [3, 4, 5, 6, 7, 8, 9, 10]
+  let characterField = new FCPP.CharacterField(levelTable[level], 100, 30);
+
   /**
    * レベル管理を初期化
    */
   FCPP.Level.initialize = () => {
-    
   };
 
   /**
@@ -18,12 +21,16 @@
    */
   FCPP.Level.update = (context) => {
     const canvasWidth = 1280, canvasHeight = 720;
-    const characterField = new FCPP.CharacterField(10, 100, 30);
     let timer = setInterval(() => {
       //clearInterval(timer);
       //context.fillRect(0, 0, canvasWidth, canvasHeight);
       context.clearRect(0, 0, canvasWidth, canvasHeight);
       characterField.draw(context);
+      if (characterField.isCorrectAll()) {
+        if (++level >= levelTable.length)
+          level = 0;
+        characterField = new FCPP.CharacterField(levelTable[level], 100, 30);
+      }
     }, 32);
   };
 
